@@ -7,7 +7,7 @@ const { authUser } = require('../utils')
 
 router.use('/auth', authRouter)
 router.use('/users', authUser, usersRouter)
-router.use('/notes', authUser, notesRouter)
+router.use('/me/notes', authUser, notesRouter)
 
 router.get('/whoami', authUser, (req, res) => {
   res.send(`hi there! ${res.locals.user.name}`)
