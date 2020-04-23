@@ -20,12 +20,10 @@ const userSchema = new mongoose.Schema({
     required: true,
     minlength: 6
   },
-  role: {
-    type: String,
-    enum: ['admin', 'user'],
-    required: false,
-    default: 'user'
-  },
+  notes: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'note'
+  }],
   createdAt: {
     type: Number,
     default: Date.now()
