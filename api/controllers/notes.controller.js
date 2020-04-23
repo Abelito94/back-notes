@@ -10,26 +10,19 @@ module.exports = {
 }
 
 function getAllUserNotes (req, res) {
-	const userId = res.locals.user._id
+  const userId = res.locals.user._id
   NotesModel
-    .find()
-		.then(notes => res.json(notes.filter(note => console.log(note.user[0]) == console.log(userId))))
+    .find({ user: userId })
+    .then(notes => res.json(notes))
     .catch((err) => handleError(err))
 }
 
 function createNote (req, res) {
-  const userId = res.locals.user._id
-  const noteBody = req.body
+  const noteBody = { user: res.locals.user, ...req.body }
   NotesModel
     .create(noteBody)
-    .then(note => {
-      note.user.push(userId)
-      note
-        .save()
-        .then((response) => res.json(response))
-        .catch((err) => handleError(err));
-    })
-    .catch((err) => handleError(err, res))
+    .then((response) => res.json(response))
+    .catch((err) => handleError(err))
 }
 
 function getUserNote (req, res) {
