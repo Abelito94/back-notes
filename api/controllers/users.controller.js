@@ -7,7 +7,7 @@ module.exports = {
   updateUser,
   getNotesByUser,
   addNotesToUser,
-  deleteNotesFromOneUser
+  deleteNoteFromOneUser
 }
 
 function getUserById (req, res) {
@@ -56,7 +56,7 @@ function addNotesToUser (req, res) {
     .catch((err) => handleError(err))
 }
 
-function deleteNotesFromOneUser (req, res) {
+function deleteNoteFromOneUser (req, res) {
   const noteId = req.query.noteid
   UserModel
     .findById(req.params.id)
