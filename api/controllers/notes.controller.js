@@ -27,13 +27,13 @@ function createNote (req, res) {
 
 function getUserNote (req, res) {
   NotesModel
-    .findById(req.params.id)
+    .findById(req.params.noteId)
     .then(response => res.json(response))
     .catch((err) => handleError(err, res))
 }
 function updateNote (req, res) {
   NotesModel
-    .findByIdAndUpdate(req.params.id, req.body, {
+    .findByIdAndUpdate(req.params.noteId, req.body, {
       new: true,
       runValidators: true
     })
@@ -43,7 +43,7 @@ function updateNote (req, res) {
 
 function deleteNote (req, res) {
   NotesModel
-    .remove({ _id: req.params.id })
+    .findByIdAndDelete({ _id: req.params.noteId })
     .then(response => res.json(response))
     .catch(err => handleError(err, res))
 }
